@@ -1,0 +1,9 @@
+keycloak:
+  auth-server-url: http://localhost:8484/auth
+  realm: Lavka
+  resource: client
+  public-client: true
+
+#keycloak.realm=SpringBootKeycloak
+#keycloak.resource=login-app
+#keycloak.public-client=true
