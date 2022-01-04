@@ -2,6 +2,7 @@ package org.shop.entites;
 
 
 import lombok.*;
+import org.shop.dto.ClientDTO;
 import org.shop.enums.Status;
 
 import javax.persistence.*;
@@ -44,4 +45,15 @@ public class Client {
     @Column(name = "registrationDate")
     private Date registrationDate;
 
+
+    public Client(ClientDTO clientDTO) {
+        this.id = clientDTO.getId();
+        this.firstName = clientDTO.getFirstName();
+        this.secondName = clientDTO.getSecondName();
+        this.phoneNumber = clientDTO.getPhoneNumber();
+        this.email = clientDTO.getEmail();
+        this.subscribed = clientDTO.getSubscribed();
+        this.notifications = clientDTO.getNotifications();
+        this.status = clientDTO.getStatus();
+    }
 }
