@@ -72,7 +72,7 @@ public class OrderContentService implements IOrderContent {
 
     private Order calculateTotalCost(Order order) {
         log.info("Order info : {}", order.toString());
-        List<OrderContent> orderContent = orderContentRepository.getAllByOrderNotStatus(order, OrderContentStatus.CANCELED);
+        List<OrderContent> orderContent = orderContentRepository.getAllByOrderNotStatus(order);
         Double totalCost = 0.0;
         for (OrderContent content: orderContent
              ) {

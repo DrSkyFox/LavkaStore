@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-
+    @Query("select o from Order o")
     List<Order> findALl();
 
     List<Order> findAllByOrderStatus(OrderStatus status);

@@ -64,7 +64,7 @@ public class ClientController {
 
     @Operation(summary = "Update Client PhoneNumber. Minimal Role Manager")
     @PreAuthorize("hasRole('MANAGER') ")
-    @PostMapping("/client/update/email")
+    @PostMapping("/client/update/phone")
     public ResponseEntity<Object> setPhoneNumber(@RequestParam("phoneNumber") Integer phoneNumber, @RequestParam("id") Long idClient) {
         service.changePhoneNumber(phoneNumber, idClient);
         return new ResponseEntity<>(new ResponseDTO(new Date(), "PhoneNumber change successful", ResponseStatus.SUCCESS),HttpStatus.OK);
@@ -72,7 +72,7 @@ public class ClientController {
 
     @Operation(summary = "Update Client PhoneNumber. Minimal Role Manager")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-    @PostMapping("/client/delete")
+    @DeleteMapping("/client/delete/id")
     public ResponseEntity<Object> deleteClientById(@RequestParam("id") Long idClient) {
         service.deleteClient(idClient);
         return new ResponseEntity<>(new ResponseDTO(new Date(), "Client delete successful", ResponseStatus.SUCCESS),HttpStatus.OK);
@@ -80,7 +80,7 @@ public class ClientController {
 
     @Operation(summary = "Update Client PhoneNumber. Minimal Role Manager")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-    @PostMapping("/client/delete")
+    @DeleteMapping("/client/delete")
     public ResponseEntity<Object> deleteClient(@RequestBody ClientDTO clientDTO) {
         service.deleteClient(clientDTO);
         return new ResponseEntity<>(new ResponseDTO(new Date(), "Client delete successful", ResponseStatus.SUCCESS),HttpStatus.OK);
