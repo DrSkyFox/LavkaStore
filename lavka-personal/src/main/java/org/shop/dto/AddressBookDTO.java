@@ -10,13 +10,12 @@ import org.shop.enums.Status;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class AddressBookDTO {
 
     private Long id;
 
     private Client client;
-    private Long clientID;
-
 
     private String country;
 
@@ -38,6 +37,11 @@ public class AddressBookDTO {
 
 
     public AddressBookDTO(AddressBook addressBook) {
+        setAll(addressBook);
+    }
+
+
+    public AddressBookDTO setAll(AddressBook addressBook) {
         this.id = addressBook.getId();
         this.client = addressBook.getClient();
         this.country = addressBook.getCountry();
@@ -49,6 +53,6 @@ public class AddressBookDTO {
         this.nameAddress = addressBook.getNameAddress();
         this.zipCode = addressBook.getZipCode();
         this.status = addressBook.getStatus();
+        return this;
     }
-
 }

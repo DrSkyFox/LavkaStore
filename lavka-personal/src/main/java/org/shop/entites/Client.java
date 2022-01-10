@@ -7,6 +7,7 @@ import org.shop.enums.Status;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -47,13 +48,33 @@ public class Client {
 
 
     public Client(ClientDTO clientDTO) {
-        this.id = clientDTO.getId();
-        this.firstName = clientDTO.getFirstName();
-        this.secondName = clientDTO.getSecondName();
-        this.phoneNumber = clientDTO.getPhoneNumber();
-        this.email = clientDTO.getEmail();
-        this.subscribed = clientDTO.getSubscribed();
-        this.notifications = clientDTO.getNotifications();
-        this.status = clientDTO.getStatus();
+        setAll(clientDTO);
+    }
+
+    public Client setAll(ClientDTO client){
+        this.id = client.getId();
+        this.firstName = client.getFirstName();
+        this.secondName = client.getSecondName();
+        this.phoneNumber = client.getPhoneNumber();
+        this.email = client.getEmail();
+        this.subscribed = client.getSubscribed();
+        this.notifications = client.getNotifications();
+        this.status = client.getStatus();
+        this.registrationDate = client.getRegistrationDate();
+        return this;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(id, client.id) && Objects.equals(firstName, client.firstName) && Objects.equals(secondName, client.secondName) && Objects.equals(phoneNumber, client.phoneNumber) && Objects.equals(email, client.email) && Objects.equals(subscribed, client.subscribed) && Objects.equals(notifications, client.notifications) && status == client.status && Objects.equals(registrationDate, client.registrationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, secondName, phoneNumber, email, subscribed, notifications, status, registrationDate);
     }
 }

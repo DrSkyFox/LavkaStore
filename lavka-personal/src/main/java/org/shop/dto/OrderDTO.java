@@ -23,16 +23,24 @@ public class OrderDTO {
 
     private OrderStatus orderStatus;
 
-    private Integer orderUID;
+    private String orderUID;
 
     private AddressBook addressBook;
 
     public OrderDTO(Order order) {
+        setAll(order);
+    }
+
+
+    public OrderDTO setAll(Order order) {
         this.id = order.getId();
         this.client = order.getClient();
         this.orderCreated = order.getOrderCreated();
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();
         this.addressBook = order.getAddressBook();
+        return this;
     }
+
+
 }

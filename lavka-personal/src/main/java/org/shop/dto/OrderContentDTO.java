@@ -41,4 +41,18 @@ public class OrderContentDTO {
         this.contentStatus = orderContent.getContentStatus();
         this.canceledInformation = orderContent.getCanceledInformation();
     }
+
+
+    public OrderContentDTO setAll(OrderContent orderContent) {
+        this.id = orderId.getId();
+        this.orderId = orderContent.getOrderId();
+        this.amount = orderContent.getAmount();
+        this.costPerOne = orderContent.getCostPerOne();
+        this.discount = orderContent.getDiscount();
+        this.totalCost = orderContent.getTotalCost();
+        this.contentStatus = orderContent.getContentStatus();
+        this.canceledInformation = orderContent.getCanceledInformation();
+        return this;
+    }
+
 }

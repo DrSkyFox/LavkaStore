@@ -1,9 +1,11 @@
 package org.shop.entites;
 
 import lombok.*;
+import org.shop.dto.AddressBookDTO;
 import org.shop.enums.Status;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -49,4 +51,35 @@ public class AddressBook {
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
+    public AddressBook(AddressBookDTO addressBook) {
+        setAll(addressBook);
+    }
+
+    public AddressBook setAll(AddressBookDTO addressBook) {
+        this.id = addressBook.getId();
+        this.client = addressBook.getClient();
+        this.country = addressBook.getCountry();
+        this.city = addressBook.getCity();
+        this.street = addressBook.getStreet();
+        this.houseNumber = addressBook.getHouseNumber();
+        this.apartmentOrOfficeNumber = addressBook.getApartmentOrOfficeNumber();
+        this.comment = addressBook.getComment();
+        this.nameAddress = addressBook.getNameAddress();
+        this.zipCode = addressBook.getZipCode();
+        this.status = addressBook.getStatus();
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressBook book = (AddressBook) o;
+        return Objects.equals(id, book.id) && Objects.equals(client, book.client) && Objects.equals(country, book.country) && Objects.equals(city, book.city) && Objects.equals(street, book.street) && Objects.equals(houseNumber, book.houseNumber) && Objects.equals(apartmentOrOfficeNumber, book.apartmentOrOfficeNumber) && Objects.equals(comment, book.comment) && Objects.equals(nameAddress, book.nameAddress) && Objects.equals(zipCode, book.zipCode) && status == book.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, client, country, city, street, houseNumber, apartmentOrOfficeNumber, comment, nameAddress, zipCode, status);
+    }
 }

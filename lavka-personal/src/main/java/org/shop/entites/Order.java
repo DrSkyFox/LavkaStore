@@ -2,10 +2,13 @@ package org.shop.entites;
 
 
 import lombok.*;
+import org.shop.dto.OrderDTO;
 import org.shop.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
+
 
 @Getter
 @Setter
@@ -32,11 +35,37 @@ public class Order {
     private OrderStatus orderStatus;
 
     @Column(name = "order_uid", nullable = false)
-    private Integer orderUID;
+    private String orderUID;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "address_book_id", nullable = false)
     private AddressBook addressBook;
 
 
+    public Order(OrderDTO order) {
+        setAll(order);
+    }
+
+    public Order setAll(OrderDTO order) {
+        this.id = order.getId();
+        this.client = order.getClient();
+        this.orderCreated = order.getOrderCreated();
+        this.orderStatus = order.getOrderStatus();
+        this.orderUID = order.getOrderUID();
+        this.addressBook = order.getAddressBook();
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) && Objects.equals(client, order.client) && Objects.equals(orderCreated, order.orderCreated) && orderStatus == order.orderStatus && Objects.equals(orderUID, order.orderUID) && Objects.equals(addressBook, order.addressBook);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, client, orderCreated, orderStatus, orderUID, addressBook);
+    }
 }

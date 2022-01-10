@@ -26,6 +26,10 @@ public class ClientDTO {
 
 
     public ClientDTO(Client client) {
+        setAll(client);
+    }
+
+    public ClientDTO setAll(Client client){
         this.id = client.getId();
         this.firstName = client.getFirstName();
         this.secondName = client.getSecondName();
@@ -35,8 +39,7 @@ public class ClientDTO {
         this.notifications = client.getNotifications();
         this.status = client.getStatus();
         this.registrationDate = client.getRegistrationDate();
+        return this;
     }
-
-
 
 }

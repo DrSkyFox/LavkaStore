@@ -2,9 +2,11 @@ package org.shop.entites;
 
 
 import lombok.*;
+import org.shop.dto.OrderContentDTO;
 import org.shop.enums.OrderContentStatus;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -41,4 +43,34 @@ public class OrderContent {
     @Column(name = "canceledInformation")
     private String canceledInformation;
 
+
+    public OrderContent(OrderContentDTO orderContent) {
+        setAll(orderContent);
+    }
+
+    public OrderContent setAll(OrderContentDTO orderContent) {
+        this.id = orderId.getId();
+        this.orderId = orderContent.getOrderId();
+        this.amount = orderContent.getAmount();
+        this.costPerOne = orderContent.getCostPerOne();
+        this.discount = orderContent.getDiscount();
+        this.totalCost = orderContent.getTotalCost();
+        this.contentStatus = orderContent.getContentStatus();
+        this.canceledInformation = orderContent.getCanceledInformation();
+        return this;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderContent that = (OrderContent) o;
+        return Objects.equals(id, that.id) && Objects.equals(orderId, that.orderId) && Objects.equals(amount, that.amount) && Objects.equals(costPerOne, that.costPerOne) && Objects.equals(discount, that.discount) && Objects.equals(totalCost, that.totalCost) && contentStatus == that.contentStatus && Objects.equals(canceledInformation, that.canceledInformation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, orderId, amount, costPerOne, discount, totalCost, contentStatus, canceledInformation);
+    }
 }

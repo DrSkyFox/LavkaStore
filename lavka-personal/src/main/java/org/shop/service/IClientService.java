@@ -1,18 +1,22 @@
 package org.shop.service;
 
 import org.shop.dto.ClientDTO;
-import org.shop.entites.Client;
-
 import java.util.List;
-import java.util.Optional;
+
 
 public interface IClientService {
 
-    Optional<ClientDTO> getClientInfo(Long id);
+    ClientDTO getClientInfo(Long id);
 
     List<ClientDTO> getAllClients();
 
-    Optional<ClientDTO> saveClientData(ClientDTO clientDTO);
+    ClientDTO saveClientData(ClientDTO clientDTO);
+
+    ClientDTO changePhoneNumber(Integer phoneNumber, Long clientID);
+
+    ClientDTO changeEmail(String email, Long clientID);
 
     void deleteClient(ClientDTO clientDTO);
+
+    void deleteClient(Long id);
 }

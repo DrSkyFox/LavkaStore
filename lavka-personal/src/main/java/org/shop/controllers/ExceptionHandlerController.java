@@ -1,7 +1,7 @@
 package org.shop.controllers;
 
 import org.shop.exceptions.ClientNotExists;
-import org.shop.exceptions.ClientOperationException;
+
 import org.shop.responses.ResponseDTO;
 import org.shop.responses.ResponseStatus;
 import org.springframework.http.HttpStatus;
