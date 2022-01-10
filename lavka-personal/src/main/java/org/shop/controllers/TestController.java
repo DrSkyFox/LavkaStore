@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@Tag(name = "Test API")
+@Tag(name = "Test API. Testing Access")
 @RestController
 @RequestMapping("/api/v1/test")
 public class TestController {
