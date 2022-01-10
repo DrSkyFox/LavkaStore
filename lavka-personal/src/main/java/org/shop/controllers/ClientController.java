@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/api/v1/client")
 public class ClientController {
 
-    private IClientService service;
+    private final IClientService service;
 
     @Autowired
     public ClientController(IClientService service) {

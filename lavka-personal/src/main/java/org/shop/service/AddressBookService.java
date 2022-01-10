@@ -105,7 +105,7 @@ public class AddressBookService implements IAddressBookService{
         Optional<Client> client = clientRepository.findById(id);
         if(client.isPresent()) {
             log.info("Get All Address");
-            return addressBookRepositories.findAllByClient(client.get(), Status.ACTIVE).stream().map(AddressBookDTO::new).collect(Collectors.toList());
+            return addressBookRepositories.findAllByClient(client.get()).stream().map(AddressBookDTO::new).collect(Collectors.toList());
         } else {
             log.warn("Client with id - {} not found", id);
             throw new ClientNotExists("Client with id " + id + " not exists");

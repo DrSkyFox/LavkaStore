@@ -5,6 +5,7 @@ public class AddressBookNotExists extends RuntimeException{
     private static final String DEFAULT_MESSAGE = "Address not exists";
 
     public AddressBookNotExists() {
+        super(DEFAULT_MESSAGE);
     }
 
     public AddressBookNotExists(String message) {
@@ -14,4 +15,6 @@ public class AddressBookNotExists extends RuntimeException{
     public AddressBookNotExists(String message, Throwable cause) {
         super(message, cause);
     }
+
+
 }

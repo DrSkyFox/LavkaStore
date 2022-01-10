@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
+
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ import java.util.Date;
 public class ExceptionHandlerController {
 
     @ExceptionHandler(ClientNotExists.class)
-    public ResponseEntity<?> clientNotFoundHandle(Exception exception, WebRequest request) {
+    public ResponseEntity<?> clientNotFoundHandle(Exception exception) {
         return new ResponseEntity<>(
                 new ResponseDTO(new Date(), exception.getMessage(), ResponseStatus.ERROR)
                 , HttpStatus.BAD_REQUEST
