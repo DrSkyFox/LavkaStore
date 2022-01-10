@@ -11,7 +11,7 @@ public interface IOrderContent {
     OrderContentDTO getInfoOrderContent(Long id);
     OrderContentDTO changeOrderContent(OrderContentDTO orderContent);
 
-    List<OrderContentDTO> getAllOrderContents(Long OrderId);
+    List<OrderContentDTO> getAllOrderContents(Long orderId);
     List<OrderContentDTO> getAllOrderContents(OrderDTO order);
 
 

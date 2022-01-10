@@ -27,6 +27,8 @@ public class OrderDTO {
 
     private AddressBook addressBook;
 
+    private Double totalCost;
+
     public OrderDTO(Order order) {
         setAll(order);
     }
@@ -39,6 +41,7 @@ public class OrderDTO {
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();
         this.addressBook = order.getAddressBook();
+        this.totalCost = order.getTotalCost();
         return this;
     }
 

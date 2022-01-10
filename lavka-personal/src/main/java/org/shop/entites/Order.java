@@ -41,6 +41,8 @@ public class Order {
     @JoinColumn(name = "address_book_id", nullable = false)
     private AddressBook addressBook;
 
+    @Column(name = "totalCost", nullable = false)
+    private Double totalCost;
 
     public Order(OrderDTO order) {
         setAll(order);
@@ -53,6 +55,7 @@ public class Order {
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();
         this.addressBook = order.getAddressBook();
+        this.totalCost = order.getTotalCost();
         return this;
     }
 

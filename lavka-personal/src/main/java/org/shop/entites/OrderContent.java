@@ -23,7 +23,7 @@ public class OrderContent {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "order_id", nullable = false)
-    private Order orderId;
+    private Order order;
 
     @Column(name = "amount", nullable = false, length = 6)
     private Integer amount;
@@ -49,8 +49,8 @@ public class OrderContent {
     }
 
     public OrderContent setAll(OrderContentDTO orderContent) {
-        this.id = orderId.getId();
-        this.orderId = orderContent.getOrderId();
+        this.id = order.getId();
+        this.order = orderContent.getOrderId();
         this.amount = orderContent.getAmount();
         this.costPerOne = orderContent.getCostPerOne();
         this.discount = orderContent.getDiscount();
@@ -60,17 +60,16 @@ public class OrderContent {
         return this;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderContent that = (OrderContent) o;
-        return Objects.equals(id, that.id) && Objects.equals(orderId, that.orderId) && Objects.equals(amount, that.amount) && Objects.equals(costPerOne, that.costPerOne) && Objects.equals(discount, that.discount) && Objects.equals(totalCost, that.totalCost) && contentStatus == that.contentStatus && Objects.equals(canceledInformation, that.canceledInformation);
+        return Objects.equals(id, that.id) && Objects.equals(order, that.order) && Objects.equals(amount, that.amount) && Objects.equals(costPerOne, that.costPerOne) && Objects.equals(discount, that.discount) && Objects.equals(totalCost, that.totalCost) && contentStatus == that.contentStatus && Objects.equals(canceledInformation, that.canceledInformation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderId, amount, costPerOne, discount, totalCost, contentStatus, canceledInformation);
+        return Objects.hash(id, order, amount, costPerOne, discount, totalCost, contentStatus, canceledInformation);
     }
 }

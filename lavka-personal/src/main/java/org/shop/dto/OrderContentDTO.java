@@ -5,8 +5,6 @@ import org.shop.entites.Order;
 import org.shop.entites.OrderContent;
 import org.shop.enums.OrderContentStatus;
 
-import javax.persistence.*;
-
 @Getter
 @Setter
 @Builder
@@ -33,7 +31,7 @@ public class OrderContentDTO {
 
     public OrderContentDTO(OrderContent orderContent) {
         this.id = orderId.getId();
-        this.orderId = orderContent.getOrderId();
+        this.orderId = orderContent.getOrder();
         this.amount = orderContent.getAmount();
         this.costPerOne = orderContent.getCostPerOne();
         this.discount = orderContent.getDiscount();
@@ -45,7 +43,7 @@ public class OrderContentDTO {
 
     public OrderContentDTO setAll(OrderContent orderContent) {
         this.id = orderId.getId();
-        this.orderId = orderContent.getOrderId();
+        this.orderId = orderContent.getOrder();
         this.amount = orderContent.getAmount();
         this.costPerOne = orderContent.getCostPerOne();
         this.discount = orderContent.getDiscount();
