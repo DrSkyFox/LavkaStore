@@ -9,16 +9,16 @@ import org.springframework.context.ApplicationEvent;
 @Slf4j
 @Getter
 @Setter
-public class ChangePhoneNumber extends ApplicationEvent {
+
+public class ChangeEmail extends ApplicationEvent {
 
     private Long clientId;
-    private Integer phoneNumber;
+    private String email;
 
     @Builder
-    public ChangePhoneNumber(Object source, Long clientId, Integer phoneNumber) {
+    public ChangeEmail(Object source, Long clientId, String email) {
         super(source);
         this.clientId = clientId;
-        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
-
 }

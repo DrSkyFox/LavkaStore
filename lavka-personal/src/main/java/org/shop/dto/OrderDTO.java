@@ -24,7 +24,7 @@ public class OrderDTO {
 
     private String orderUID;
 
-    private AddressBook addressBook;
+    private Long  addressID;
 
     private Double totalCost;
 
@@ -39,7 +39,7 @@ public class OrderDTO {
         this.orderCreated = order.getOrderCreated();
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();
-        this.addressBook = order.getAddressBook();
+        this.addressID = order.getAddressBook().getId();
         this.totalCost = order.getTotalCost();
         return this;
     }

@@ -14,10 +14,13 @@ import org.shop.enums.OrderStatus;
 import org.shop.exceptions.BadRequestParameters;
 import org.shop.exceptions.ClientNotExists;
 import org.shop.exceptions.OrderNotExists;
+import org.shop.pages.OrdersPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,31 +43,47 @@ public class OrderService implements IOrderService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<OrderDTO> getAllOrders(ClientDTO client) {
-        log.info("Get All Orders for client - {}", client);
-        if (client == null) {
-            log.info("Client is null -> Get All Orders of All clients");
-            return orderRepository.findALl().stream().map(OrderDTO::new).collect(Collectors.toList());
-        } else {
-            return getAllOrders(client.getId());
-        }
+    public OrdersPage getAllOrders(List<OrderStatus>  status , Pageable pageable) {
+
+        log.info("Get All Orders. StatusList - {}", status);
+        var orders = orderRepository.findAllByStatus(status, pageable).stream().map(OrderDTO::new).collect(Collectors.toList());
+
+        return OrdersPage.builder()
+                .orders(orders)
+                .pageNumber(pageable.getPageNumber())
+                .sizeOfPage(pageable.getPageSize())
+                .build();
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public List<OrderDTO> getAllOrdersByIdClient(Long id) {
-        log.info("Get All Orders for client - {}", id);
-        return getAllOrders(id);
+    public OrdersPage getAllOrdersByPagesAndClientId(Long clientId, List<OrderStatus>  status, Pageable pageable) {
+
+        log.info("Get All Orders for client - {}", clientId);
+        var orders = orderRepository.findAllByStatusForClient(clientId, status, pageable).stream().map(OrderDTO::new).collect(Collectors.toList());
+
+        return OrdersPage.builder()
+                .orders(orders)
+                .pageNumber(pageable.getPageNumber())
+                .sizeOfPage(pageable.getPageSize())
+                .build();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public OrdersPage getAllOrdersByPagesAndClientIdAndBetweenDate(Long clientId, List<OrderStatus>  status, Date startDate, Date endDate, Pageable pageable) {
 
-    private List<OrderDTO> getAllOrders(Long id) {
-        log.info("Check existing client");
-        Optional<Client> client = clientRepository.findById(id);
-        if (client.isPresent()) {
-            log.info("getAll orders for client");
-            return orderRepository.findAllByClientId(id).stream().map(OrderDTO::new).collect(Collectors.toList());
-        } else throw new ClientNotExists("Client with id - " + id + " not found");
+        log.info("Get All Orders for client - {} between dates: {} and {}. StatusOrderFilter - {}", clientId, startDate, endDate, status);
+        var orders = orderRepository.findAllByStatusForClientBetweenDates(clientId,status,startDate,endDate,pageable).stream().map(OrderDTO::new).collect(Collectors.toList());
+
+        return OrdersPage.builder()
+                .orders(orders)
+                .pageNumber(pageable.getPageNumber())
+                .sizeOfPage(pageable.getPageSize())
+                .build();
+
     }
+
 
     @Override
     public OrderDTO getInfoOrderByIdOrder(Long id) {

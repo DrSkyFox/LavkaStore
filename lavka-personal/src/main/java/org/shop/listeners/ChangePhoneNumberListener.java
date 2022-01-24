@@ -5,7 +5,6 @@ import org.springframework.context.ApplicationListener;
 
 public class ChangePhoneNumberListener implements ApplicationListener<ChangePhoneNumber> {
 
-
     @Override
     public void onApplicationEvent(ChangePhoneNumber event) {
 

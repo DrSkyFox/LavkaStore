@@ -44,9 +44,7 @@ public class OrderContentService implements IOrderContent {
             throw new BadRequestParameters("Order number cannot be changed");
         }
 
-        if(orderContent.getOrderId() != content.getOrder()) {
-            throw new BadRequestParameters("Order number cannot be changed");
-        }
+
 
         OrderContent fromDto = new OrderContent(orderContent);
 

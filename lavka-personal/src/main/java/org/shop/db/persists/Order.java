@@ -16,7 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "address_book")
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -32,6 +32,7 @@ public class Order {
     private Date orderCreated;
 
     @Enumerated(EnumType.ORDINAL)
+    @Column(name = "orderStatus")
     private OrderStatus orderStatus;
 
     @Column(name = "order_uid", nullable = false)
@@ -53,7 +54,6 @@ public class Order {
         this.orderCreated = order.getOrderCreated();
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();
-        this.addressBook = order.getAddressBook();
         this.totalCost = order.getTotalCost();
         return this;
     }
