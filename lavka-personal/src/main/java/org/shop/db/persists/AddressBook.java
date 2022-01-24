@@ -1,4 +1,4 @@
-package org.shop.entites;
+package org.shop.db.persists;
 
 import lombok.*;
 import org.shop.dto.AddressBookDTO;
@@ -57,7 +57,6 @@ public class AddressBook {
 
     public AddressBook setAll(AddressBookDTO addressBook) {
         this.id = addressBook.getId();
-        this.client = addressBook.getClient();
         this.country = addressBook.getCountry();
         this.city = addressBook.getCity();
         this.street = addressBook.getStreet();

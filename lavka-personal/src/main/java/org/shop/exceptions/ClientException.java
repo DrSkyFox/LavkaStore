@@ -2,16 +2,19 @@ package org.shop.exceptions;
 
 public class ClientException extends RuntimeException{
 
-    public ClientException() {
+    private static final String DEFAULT_MESSAGE = "An exception has occurred!";
 
+    public ClientException() {
+        super(DEFAULT_MESSAGE);
     }
 
-    public ClientException(String message) {
-        super(message);
+    public ClientException(String message)
+    {
+        super(DEFAULT_MESSAGE + " " + message);
     }
 
     public ClientException(String message, Throwable cause) {
-        super(message, cause);
+        super(DEFAULT_MESSAGE + " " + message, cause);
     }
 
 }

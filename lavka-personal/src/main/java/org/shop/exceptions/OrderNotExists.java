@@ -9,10 +9,10 @@ public class OrderNotExists extends RuntimeException {
     }
 
     public OrderNotExists(String message) {
-        super(message);
+        super(DEFAULT_MESSAGE + " " + message);
     }
 
     public OrderNotExists(String message, Throwable cause) {
-        super(message, cause);
+        super(DEFAULT_MESSAGE + " "+ message, cause);
     }
 }

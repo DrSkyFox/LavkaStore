@@ -1,4 +1,4 @@
-package org.shop.entites;
+package org.shop.db.persists;
 
 
 import lombok.*;
@@ -50,7 +50,6 @@ public class Order {
 
     public Order setAll(OrderDTO order) {
         this.id = order.getId();
-        this.client = order.getClient();
         this.orderCreated = order.getOrderCreated();
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();

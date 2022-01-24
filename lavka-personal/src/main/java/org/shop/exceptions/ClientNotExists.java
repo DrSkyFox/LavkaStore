@@ -9,7 +9,10 @@ public class ClientNotExists extends RuntimeException{
     }
 
     public ClientNotExists(String message) {
-        super(message);
+        super(DEFAULT_MESSAGE + " " + message);
     }
 
+    public ClientNotExists(String message, Throwable cause) {
+        super(DEFAULT_MESSAGE + " " + message, cause);
+    }
 }

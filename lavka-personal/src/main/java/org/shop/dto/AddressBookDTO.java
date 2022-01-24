@@ -1,8 +1,7 @@
 package org.shop.dto;
 
 import lombok.*;
-import org.shop.entites.AddressBook;
-import org.shop.entites.Client;
+import org.shop.db.persists.AddressBook;
 import org.shop.enums.Status;
 
 @Getter
@@ -15,7 +14,7 @@ public class AddressBookDTO {
 
     private Long id;
 
-    private Client client;
+    private Long clientId;
 
     private String country;
 
@@ -43,7 +42,7 @@ public class AddressBookDTO {
 
     public AddressBookDTO setAll(AddressBook addressBook) {
         this.id = addressBook.getId();
-        this.client = addressBook.getClient();
+        this.clientId = addressBook.getClient().getId();
         this.country = addressBook.getCountry();
         this.city = addressBook.getCity();
         this.street = addressBook.getStreet();

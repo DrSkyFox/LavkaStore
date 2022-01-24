@@ -1,7 +1,7 @@
-package org.shop.repositories;
+package org.shop.db;
 
-import org.shop.entites.Order;
-import org.shop.entites.OrderContent;
+import org.shop.db.persists.Order;
+import org.shop.db.persists.OrderContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

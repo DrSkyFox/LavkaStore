@@ -1,9 +1,8 @@
 package org.shop.dto;
 
 import lombok.*;
-import org.shop.entites.AddressBook;
-import org.shop.entites.Client;
-import org.shop.entites.Order;
+import org.shop.db.persists.AddressBook;
+import org.shop.db.persists.Order;
 import org.shop.enums.OrderStatus;
 
 import java.util.Date;
@@ -17,7 +16,7 @@ public class OrderDTO {
 
     private Long id;
 
-    private Client client;
+    private Long clientId;
 
     private Date orderCreated;
 
@@ -36,7 +35,7 @@ public class OrderDTO {
 
     public OrderDTO setAll(Order order) {
         this.id = order.getId();
-        this.client = order.getClient();
+        this.clientId = order.getClient().getId();
         this.orderCreated = order.getOrderCreated();
         this.orderStatus = order.getOrderStatus();
         this.orderUID = order.getOrderUID();

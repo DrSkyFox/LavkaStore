@@ -9,11 +9,11 @@ public class AddressBookNotExists extends RuntimeException{
     }
 
     public AddressBookNotExists(String message) {
-        super(message);
+        super(DEFAULT_MESSAGE + " " + message);
     }
 
     public AddressBookNotExists(String message, Throwable cause) {
-        super(message, cause);
+        super(DEFAULT_MESSAGE + " " + message, cause);
     }
 
 

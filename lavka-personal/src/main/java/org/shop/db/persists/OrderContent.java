@@ -1,4 +1,4 @@
-package org.shop.entites;
+package org.shop.db.persists;
 
 
 import lombok.*;
@@ -50,7 +50,6 @@ public class OrderContent {
 
     public OrderContent setAll(OrderContentDTO orderContent) {
         this.id = order.getId();
-        this.order = orderContent.getOrderId();
         this.amount = orderContent.getAmount();
         this.costPerOne = orderContent.getCostPerOne();
         this.discount = orderContent.getDiscount();

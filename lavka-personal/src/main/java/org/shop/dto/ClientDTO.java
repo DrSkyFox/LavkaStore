@@ -2,7 +2,7 @@ package org.shop.dto;
 
 
 import lombok.*;
-import org.shop.entites.Client;
+import org.shop.db.persists.Client;
 import org.shop.enums.Status;
 
 import java.util.Date;
@@ -24,6 +24,9 @@ public class ClientDTO {
     private Status status;
     private Date registrationDate;
 
+    private Boolean emailIsVerified;
+    private Boolean phoneIsVerified;
+
 
     public ClientDTO(Client client) {
         setAll(client);
@@ -39,6 +42,8 @@ public class ClientDTO {
         this.notifications = client.getNotifications();
         this.status = client.getStatus();
         this.registrationDate = client.getRegistrationDate();
+        this.emailIsVerified = client.getEmailIsVerified();
+        this.phoneIsVerified = client.getPhoneIsVerified();
         return this;
     }
 

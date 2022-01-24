@@ -1,4 +1,4 @@
-package org.shop.entites;
+package org.shop.db.persists;
 
 
 import lombok.*;
@@ -45,6 +45,12 @@ public class Client {
 
     @Column(name = "registrationDate")
     private Date registrationDate;
+
+    @Column(name = "emailIsVerified")
+    private Boolean emailIsVerified = false;
+
+    @Column(name="phoneIsVerified")
+    private Boolean phoneIsVerified = false;
 
 
     public Client(ClientDTO clientDTO) {

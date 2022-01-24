@@ -1,8 +1,7 @@
 package org.shop.dto;
 
 import lombok.*;
-import org.shop.entites.Order;
-import org.shop.entites.OrderContent;
+import org.shop.db.persists.OrderContent;
 import org.shop.enums.OrderContentStatus;
 
 @Getter
@@ -14,7 +13,7 @@ public class OrderContentDTO {
 
     private Long id;
 
-    private Order orderId;
+    private Long orderId;
 
     private Integer amount;
 
@@ -30,8 +29,8 @@ public class OrderContentDTO {
 
 
     public OrderContentDTO(OrderContent orderContent) {
-        this.id = orderId.getId();
-        this.orderId = orderContent.getOrder();
+        this.id = orderContent.getId();
+        this.orderId = orderContent.getOrder().getId();
         this.amount = orderContent.getAmount();
         this.costPerOne = orderContent.getCostPerOne();
         this.discount = orderContent.getDiscount();
@@ -42,8 +41,8 @@ public class OrderContentDTO {
 
 
     public OrderContentDTO setAll(OrderContent orderContent) {
-        this.id = orderId.getId();
-        this.orderId = orderContent.getOrder();
+        this.id = orderContent.getId();
+        this.orderId = orderContent.getOrder().getId();
         this.amount = orderContent.getAmount();
         this.costPerOne = orderContent.getCostPerOne();
         this.discount = orderContent.getDiscount();

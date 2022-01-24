@@ -5,11 +5,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.shop.dto.ClientDTO;
-import org.shop.responses.ResponseDTO;
-import org.shop.responses.ResponseStatus;
+import org.shop.enums.Status;
+import org.shop.pages.ClientsPage;
 import org.shop.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +22,11 @@ import java.util.Date;
 import java.util.List;
 
 
+
 @Slf4j
 @Tag(name = "Client API")
 @RestController
-@RequestMapping("/api/v1/client")
+@RequestMapping(value = "/api/v1/client", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 
     private final IClientService service;
@@ -33,57 +38,59 @@ public class ClientController {
 
     @Operation(summary = "Get All Clients")
     @GetMapping("/all")
-    public List<ClientDTO> getAllClients() {
+    public ResponseEntity<ClientsPage> getAllClients() {
         log.info("Get All clients");
-        return service.getAllClients();
+        return ResponseEntity.status(HttpStatus.OK).body(ClientsPage.builder().clientList( service.getAllClients()).build());
     }
+
+    @Operation(summary = "Get All Clients")
+    @GetMapping(value = "/all", params = {"page" ,"size", "status", "sortField", "direction"})
+    public ClientsPage getAllClientsPage(@PageableDefault(size = 10, page = 0, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                         @RequestParam(name = "status", required = false, defaultValue = "ACTIVE, DELETED") List<Status> status) {
+        log.info("Get All clients");
+        return service.getAllClient(status, pageable);
+    }
+
 
     @PreAuthorize("hasAnyRole('CUSTOMER')")
     @Operation(summary = "Get Client Info. Minimal Role Customer")
-    @GetMapping("/client/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ClientDTO> getClientInfo(@PathVariable("id") Long id) {
         ClientDTO clientDTO = service.getClientInfo(id);
-        return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
 
     @Operation(summary = "Update Client Info")
     @PreAuthorize("hasRole('MANAGER')")
-    @PutMapping("/client/update")
-    public ResponseEntity<ClientDTO> setClientInfo(@RequestBody ClientDTO clientDTO) {
+    @PutMapping("/{id}/update")
+    public ResponseEntity<ClientDTO> setClientInfo(@PathVariable("id") Long id, @RequestBody ClientDTO clientDTO) {
         clientDTO = service.saveClientData(clientDTO);
-        return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
 
     @Operation(summary = "Update Client Email. Minimal Role Manager")
     @PreAuthorize("hasRole('MANAGER')")
-    @PostMapping("/client/update/email")
-    public ResponseEntity<Object> setChangeEmail(@RequestParam("mail") String mail, @RequestParam("id") Long idClient) {
-        service.changeEmail(mail, idClient);
-        return new ResponseEntity<>(new ResponseDTO(new Date(), "Email change successful", ResponseStatus.SUCCESS),HttpStatus.OK);
+    @PostMapping("/{id}/update/email")
+    public ResponseEntity<ClientDTO> setChangeEmail(@PathVariable("id") Long idClient, @RequestParam("email") String email) {
+        ClientDTO clientDTO = service.changeEmail(email, idClient);
+        return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
 
     @Operation(summary = "Update Client PhoneNumber. Minimal Role Manager")
     @PreAuthorize("hasRole('MANAGER') ")
-    @PostMapping("/client/update/phone")
-    public ResponseEntity<Object> setPhoneNumber(@RequestParam("phoneNumber") Integer phoneNumber, @RequestParam("id") Long idClient) {
-        service.changePhoneNumber(phoneNumber, idClient);
-        return new ResponseEntity<>(new ResponseDTO(new Date(), "PhoneNumber change successful", ResponseStatus.SUCCESS),HttpStatus.OK);
+    @PostMapping("/{id}/update/phone")
+    public ResponseEntity<Object> setPhoneNumber(@PathVariable("id") Long idClient, @RequestParam("phone") Integer phoneNumber) {
+        ClientDTO clientDTO = service.changePhoneNumber(phoneNumber, idClient);
+        return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
 
     @Operation(summary = "Update Client PhoneNumber. Minimal Role Manager")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-    @DeleteMapping("/client/delete/id")
-    public ResponseEntity<Object> deleteClientById(@RequestParam("id") Long idClient) {
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<Object> deleteClientById(@PathVariable("id") Long idClient) {
         service.deleteClient(idClient);
-        return new ResponseEntity<>(new ResponseDTO(new Date(), "Client delete successful", ResponseStatus.SUCCESS),HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new Date());
     }
 
-    @Operation(summary = "Update Client PhoneNumber. Minimal Role Manager")
-    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-    @DeleteMapping("/client/delete")
-    public ResponseEntity<Object> deleteClient(@RequestBody ClientDTO clientDTO) {
-        service.deleteClient(clientDTO);
-        return new ResponseEntity<>(new ResponseDTO(new Date(), "Client delete successful", ResponseStatus.SUCCESS),HttpStatus.OK);
-    }
 
 }

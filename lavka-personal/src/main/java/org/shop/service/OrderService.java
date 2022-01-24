@@ -1,20 +1,19 @@
 package org.shop.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.shop.db.persists.AddressBook;
+import org.shop.db.persists.Client;
+import org.shop.db.persists.Order;
+import org.shop.db.AddressBookRepositories;
+import org.shop.db.ClientRepository;
+import org.shop.db.OrderRepository;
 import org.shop.dto.AddressBookDTO;
 import org.shop.dto.ClientDTO;
 import org.shop.dto.OrderDTO;
-import org.shop.entites.AddressBook;
-import org.shop.entites.Client;
-import org.shop.entites.Order;
 import org.shop.enums.OrderStatus;
-import org.shop.enums.Status;
 import org.shop.exceptions.BadRequestParameters;
 import org.shop.exceptions.ClientNotExists;
 import org.shop.exceptions.OrderNotExists;
-import org.shop.repositories.AddressBookRepositories;
-import org.shop.repositories.ClientRepository;
-import org.shop.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

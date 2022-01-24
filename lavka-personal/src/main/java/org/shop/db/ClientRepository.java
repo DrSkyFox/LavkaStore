@@ -1,7 +1,9 @@
-package org.shop.repositories;
+package org.shop.db;
 
-import org.shop.entites.Client;
+import org.shop.db.persists.Client;
 import org.shop.enums.Status;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,6 +29,10 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             @Param("email") String email,
             @Param("status") Status status
     );
+
+    @Query(value = "select c from Client c where c.status in ?1", nativeQuery = true, countQuery = "select count(*) from Client c where c.status in ?1")
+    Page<Client> findAll(List<Status> statusList, Pageable pageable);
+
 
 
 

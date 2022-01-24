@@ -1,7 +1,7 @@
-package org.shop.repositories;
+package org.shop.db;
 
-import org.shop.entites.Client;
-import org.shop.entites.Order;
+import org.shop.db.persists.Client;
+import org.shop.db.persists.Order;
 import org.shop.enums.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
