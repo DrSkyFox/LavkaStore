@@ -1,7 +1,7 @@
 package org.shop.service.rmq;
 
-public interface IProduceMessage {
+public interface IProduceMessage<T extends RMQModelMessage> {
 
-   <T extends RMQModelMessage> void send(T message);
+   void send(T message);
 
 }

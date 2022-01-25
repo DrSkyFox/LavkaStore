@@ -11,6 +11,7 @@ public class PhoneMessage extends RMQModelMessage{
 
     private Long clientId;
     private Long phoneNumber;
+    private String message;
 
 
 }

@@ -36,22 +36,6 @@ public class TestController {
         return new TestDTO(text);
     }
 
-    @PostMapping("/post/all/")
-    public TestDTO postTestAll(@PathVariable String text) {
-        return new TestDTO(text);
-    }
-
-    @PreAuthorize("hasAnyRole('CUSTOMER')")
-    @PostMapping("/post/customer/")
-    public TestDTO postTestCustomer(@PathVariable String text) {
-        return new TestDTO(text);
-    }
-
-    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-    @PostMapping("/post/admin/")
-    public TestDTO postTestManagerOrAdmin(@PathVariable String text) {
-        return new TestDTO(text);
-    }
 
 
 

@@ -15,19 +15,16 @@ public interface IOrderService {
 
     OrdersPage getAllOrders(List<OrderStatus>  status , Pageable pageable);
 
+    OrdersPage getAllOrdersBetweenDates(List<OrderStatus>  status, Date startDate, Date endDate, Pageable pageable);
+
     OrdersPage getAllOrdersByPagesAndClientId(Long clientId, List<OrderStatus>  status, Pageable pageable);
 
     OrdersPage getAllOrdersByPagesAndClientIdAndBetweenDate(Long clientId, List<OrderStatus>  status, Date startDate, Date endDate, Pageable pageable);
 
     OrderDTO getInfoOrderByIdOrder(Long id);
 
-    OrderDTO changeOrderStatusOrder(OrderDTO orderDTO);
+    OrderDTO changeOrder(OrderDTO orderDTO);
 
-    OrderDTO changeOrderStatusOrderId(Long id, OrderStatus status);
-
-    OrderDTO changeAddressReceiptOfOrder(Long orderId, AddressBookDTO addressBook, boolean newAddress);
-
-    OrderDTO changeAddressReceiptOfOrder(Long orderId, AddressBookDTO addressBook);
 
 
 

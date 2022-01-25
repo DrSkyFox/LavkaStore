@@ -11,6 +11,7 @@ public class EmailMessage extends RMQModelMessage{
 
     private Long clientId;
     private String email;
+    private String message;
 
 
 

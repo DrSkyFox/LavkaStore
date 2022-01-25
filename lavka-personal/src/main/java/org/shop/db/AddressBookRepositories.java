@@ -1,7 +1,6 @@
 package org.shop.db;
 
 import org.shop.db.persists.AddressBook;
-import org.shop.db.persists.Client;
 import org.shop.enums.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface AddressBookRepositories extends JpaRepository<AddressBook, Long> {
 
-    List<AddressBook> findAllByClient(Client client);
 
     Optional<AddressBook> findById(Long id);
 

@@ -45,7 +45,7 @@ public class ClientController {
 
     @Operation(summary = "Get All Clients")
     @GetMapping(value = "/all", params = {"page" ,"size", "status", "sortField", "direction"})
-    public ClientsPage getAllClientsPage(@PageableDefault(size = 10, page = 0, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+    public ClientsPage getAllClientsPage(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
                                          @RequestParam(name = "status", required = false, defaultValue = "ACTIVE, DELETED") List<Status> status) {
         log.info("Get All clients");
         return service.getAllClient(status, pageable);
@@ -62,8 +62,8 @@ public class ClientController {
 
     @Operation(summary = "Update Client Info")
     @PreAuthorize("hasRole('MANAGER')")
-    @PutMapping("/{id}/update")
-    public ResponseEntity<ClientDTO> setClientInfo(@PathVariable("id") Long id, @RequestBody ClientDTO clientDTO) {
+    @PutMapping("/update")
+    public ResponseEntity<ClientDTO> setClientInfo(@RequestBody ClientDTO clientDTO) {
         clientDTO = service.saveClientData(clientDTO);
         return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
