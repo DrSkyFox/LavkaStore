@@ -41,7 +41,7 @@ public class OrderController {
     @Operation(summary = "Get All Order. Roles: Manager, Admin.")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping("/order/all")
-    public ResponseEntity<OrdersPage> getAllOrdersByClient(
+    public ResponseEntity<OrdersPage> getAllOrders(
             @RequestParam(
                     name = "status", required = false,
                     defaultValue = "CREATED, PENDING_PAYMENT, PAID, CONFIRMATION, PACKED, SHIPPED, DELIVERED, CANCELED") List<OrderStatus> status,
@@ -98,7 +98,7 @@ public class OrderController {
 
     @Operation(summary = "Get All Order. All Roles.")
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER', 'ADMIN')")
-    @GetMapping("order/get/{id}")
+    @GetMapping("order/{id}")
     public ResponseEntity<OrderDTO> getInfoOrderById(@PathVariable("id") Long id) {
         OrderDTO orderDTO = orderService.getInfoOrderByIdOrder(id);
         return ResponseEntity.status(HttpStatus.OK).body(orderDTO);
